@@ -67,14 +67,14 @@
 			function articleEliminator(str) {
 				let names = str.split(" ");
 				if(names[0] === 'a' || names[0] === 'an' || names[0] === 'the') {
-					return words.splice(1).join();
+					return names.splice(1).join();
 				}
 				return str;
 			}
 
-			const sortedBands = bands.sort(compare);
+			let sortedBands = bands.sort(compare);
 
-
+			document.querySelector('#bands').innerHTML = sortedBands.map(band => `<li>${band}</li>`).join('');
 
 
 		</script>
