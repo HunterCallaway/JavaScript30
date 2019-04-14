@@ -30,4 +30,22 @@ function paintToCanvas() {
 	}, 16);
 }
 
+function takePhoto() {
+	//Play the sound.
+	snap.currentTime = 0;
+	snap.play();
+
+	//Take the data out of the image.
+	const data = canvas.toDataURL('image/jpeg');
+	console.log(data);
+	const link = document.createElement('a');
+	link.href = link;
+	link.setAttribute('download', 'handsome');
+	link.textContent = 'Download the image';
+	strip.insertBefore(link, strip.firstChild);
+
+}
+
 getVideo();
+
+video.addEventListener('canplay', paintToCanvas);
