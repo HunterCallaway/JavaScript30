@@ -27,6 +27,16 @@ function paintToCanvas() {
 
 	return setInterval(() => {
 		ctx.drawImage(video, 0, 0, width, height);
+
+		//Take out the pixels.
+		let pixels = ctx.getImageData(0, 0, width, height);
+
+		//Try different things with them.
+		pixels = redEffect(pixels);
+
+		//Put them back.
+		ctx.putImageData(pixels, 0, 0);
+
 	}, 16);
 }
 
@@ -45,6 +55,15 @@ function takePhoto() {
 	link.innerHTML = `<img src="${data}" alt="Photo of yourself" />`
 	strip.insertBefore(link, strip.firstChild);
 
+}
+
+function redEffect(pixels) {
+	for(let i = 0; i < pixels.data.length; i = i +4) {
+		pixels.data[i + 0] = pixels.data[i + 0] + 100; //red
+		pixels.data[i + 1] = pixels.data[i + 1] - 50; //green
+		pixels .data[i + 2] = pixels.data[i + 2] * 0.5; //blue
+	}
+	return pixels;
 }
 
 getVideo();
