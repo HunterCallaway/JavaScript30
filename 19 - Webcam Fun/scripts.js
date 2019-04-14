@@ -39,9 +39,10 @@ function takePhoto() {
 	const data = canvas.toDataURL('image/jpeg');
 	console.log(data);
 	const link = document.createElement('a');
-	link.href = link;
+	link.href = data;
 	link.setAttribute('download', 'handsome');
-	link.textContent = 'Download the image';
+	//link.textContent = 'Download the image';
+	link.innerHTML = `<img src="${data}" alt="Photo of yourself" />`
 	strip.insertBefore(link, strip.firstChild);
 
 }
