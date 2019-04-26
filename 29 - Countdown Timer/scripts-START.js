@@ -1,16 +1,28 @@
 let countdown;
+const timerDisplay = document.querySelector('.display__time-left');
 
 function timer(seconds) {
 	const now = Date.now();
 	const then = now + seconds * 1000;
+	displayTimeLeft(seconds);
 
-	setInterval(() => {
+	countdown = setInterval(() => {
 		const secondsLeft = Math.round((then - Date.now()) / 1000);
 		//Check to see if it should be stopped.
-		if(secondsLeft <= 0) {
-
+		if(secondsLeft < 0) {
+			clearInterval(countdown);
+			return;
 		}
 		//Display it.
-		console.log(secondsLeft);
+		displayTimeLeft(secondsLeft);
 	}, 1000);
+}
+
+function displayTimeLeft(seconds) {
+	const minutes = Math.floor(seconds / 60);
+	const remainderSeconds = seconds % 60;
+	const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
+	timerDisplay.textContent = display;
+	document.title = display;
+	console.log({minutes, remainderSeconds});
 }
